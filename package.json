@@ -1,42 +1,41 @@
 {
-  "name": "typescript-action",
-  "description": "GitHub Actions TypeScript template",
-  "version": "0.0.0",
-  "author": "",
-  "private": true,
-  "homepage": "https://github.com/actions/typescript-action",
+  "name": "quack",
+  "description": "Check version diff between repository and registry and cry like a duck!",
+  "version": "0.1.0",
+  "author": "Danny Zhao <danny900714@gmail.com>",
+  "homepage": "https://github.com/dockcenter/quack",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/typescript-action.git"
+    "url": "git+https://github.com/dockcenter/quack.git"
   },
   "bugs": {
-    "url": "https://github.com/actions/typescript-action/issues"
+    "url": "https://github.com/dockcenter/quack/issues"
   },
   "keywords": [
     "actions",
-    "node",
-    "setup"
+    "diff",
+    "docker"
   ],
   "exports": {
     ".": "./dist/index.js"
   },
   "engines": {
-    "node": ">=21"
+    "node": ">=22"
   },
   "scripts": {
-    "bundle": "npm run format:write && npm run package",
-    "ci-test": "npx jest",
-    "coverage": "npx make-coverage-badge --output-path ./badges/coverage.svg",
-    "format:write": "npx prettier --write .",
-    "format:check": "npx prettier --check .",
-    "lint": "npx eslint . -c ./.github/linters/.eslintrc.yml",
-    "local-action": "npx local-action . src/main.ts .env",
-    "package": "npx ncc build src/index.ts -o dist --source-map --license licenses.txt",
-    "package:watch": "npm run package -- --watch",
-    "test": "npx jest",
-    "all": "npm run format:write && npm run lint && npm run test && npm run coverage && npm run package"
+    "bundle": "pnpm run format:write && pnpm run package",
+    "ci-test": "jest",
+    "coverage": "make-coverage-badge --output-path ./badges/coverage.svg",
+    "format:write": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint . -c ./.github/linters/.eslintrc.yml",
+    "local-action": "local-action . src/main.ts .env",
+    "package": "ncc build src/index.ts -o dist --source-map --license licenses.txt",
+    "package:watch": "pnpm run package -- --watch",
+    "test": "jest",
+    "all": "pnpm run format:write && pnpm run lint && pnpm run test && pnpm run coverage && pnpm run package"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "jest": {
     "preset": "ts-jest",
     "verbose": true,
