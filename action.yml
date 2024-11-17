@@ -1,23 +1,39 @@
-name: 'The name of your action here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Quack'
+description: 'Check version diff between repository and registry and cry like a duck!'
+author: 'Dockcenter'
 
 # Add your action's branding here. This will appear on the GitHub Marketplace.
 branding:
-  icon: 'heart'
-  color: 'red'
+  icon: 'tag'
+  color: 'blue'
 
 # Define your inputs here.
 inputs:
-  milliseconds:
-    description: 'Your input description here'
+  source:
+    description: The URL or the id of the source to check version diff
     required: true
-    default: '1000'
+  source-parser:
+    description: The parser to get version information from the source. Be default, it will choose the appropriate parser based on source.
+    required: true
+    default: auto
+  source-parser-config:
+    description: Additional parser configuration in key value string format (e.g. `key1=value1,key2=value2`)
+  destination:
+    description: The URL or the id of the destination to check version diff
+    required: true
+  destination-parser:
+    description: The parser to get version information from the destination. Be default, it will choose the appropriate parser based on destination.
+    required: true
+    default: auto
+  destination-parser-config:
+    description: Additional parser configuration in key value string format (e.g. `key1=value1,key2=value2`)
 
 # Define your outputs here.
 outputs:
-  time:
-    description: 'Your output description here'
+  diff-add:
+    description: A string list containing all versions that exist in source but not in destination
+  diff-delete:
+    description: A string list containing all versions that exist in destination but not in source
 
 runs:
   using: node20
