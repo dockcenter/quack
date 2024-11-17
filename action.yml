@@ -1,5 +1,6 @@
 name: 'Quack'
-description: 'Check version diff between repository and registry and cry like a duck!'
+description:
+  'Check version diff between repository and registry and cry like a duck!'
 author: 'Dockcenter'
 
 # Add your action's branding here. This will appear on the GitHub Marketplace.
@@ -13,27 +14,39 @@ inputs:
     description: The URL or the id of the source to check version diff
     required: true
   source-parser:
-    description: The parser to get version information from the source. Be default, it will choose the appropriate parser based on source.
+    description:
+      The parser to get version information from the source. Be default, it will
+      choose the appropriate parser based on source.
     required: true
     default: auto
   source-parser-config:
-    description: Additional parser configuration in key value string format (e.g. `key1=value1,key2=value2`)
+    description:
+      Additional parser configuration in key value string format (e.g.
+      `key1=value1,key2=value2`)
   destination:
     description: The URL or the id of the destination to check version diff
     required: true
   destination-parser:
-    description: The parser to get version information from the destination. Be default, it will choose the appropriate parser based on destination.
+    description:
+      The parser to get version information from the destination. Be default, it
+      will choose the appropriate parser based on destination.
     required: true
     default: auto
   destination-parser-config:
-    description: Additional parser configuration in key value string format (e.g. `key1=value1,key2=value2`)
+    description:
+      Additional parser configuration in key value string format (e.g.
+      `key1=value1,key2=value2`)
 
 # Define your outputs here.
 outputs:
   diff-add:
-    description: A string list containing all versions that exist in source but not in destination
+    description:
+      A string list containing all versions that exist in source but not in
+      destination
   diff-delete:
-    description: A string list containing all versions that exist in destination but not in source
+    description:
+      A string list containing all versions that exist in destination but not in
+      source
 
 runs:
   using: node20
