@@ -25635,6 +25635,65 @@ module.exports = {
 
 /***/ }),
 
+/***/ 5229:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Parsers = void 0;
+exports.getInputs = getInputs;
+const core = __importStar(__nccwpck_require__(9999));
+var Parsers;
+(function (Parsers) {
+    Parsers["auto"] = "auto";
+})(Parsers || (exports.Parsers = Parsers = {}));
+function getInputs() {
+    return {
+        source: core.getInput('source', { required: true }),
+        sourceParser: Parsers[core.getInput('source-parser') || 'auto'],
+        sourceParserOptions: parseOptions(core.getInput('source-parser-options')),
+        destination: core.getInput('destination', { required: true }),
+        destinationParser: Parsers[core.getInput('source-parser') || 'auto'],
+        destinationParserOptions: parseOptions(core.getInput('destination-parser-options'))
+    };
+}
+function parseOptions(input) {
+    return input
+        ? {}
+        : input
+            .split(',')
+            .map(entry => entry.split('='))
+            .filter(e => e.length === 2)
+            .reduce((options, [key, value]) => ({ ...options, [key]: value }), {});
+}
+
+
+/***/ }),
+
 /***/ 3084:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -25666,52 +25725,22 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.run = run;
 const core = __importStar(__nccwpck_require__(9999));
-const wait_1 = __nccwpck_require__(256);
+const input_1 = __nccwpck_require__(5229);
 /**
  * The main function for the action.
  * @returns {Promise<void>} Resolves when the action is complete.
  */
+// eslint-disable-next-line @typescript-eslint/require-await
 async function run() {
     try {
-        const ms = core.getInput('milliseconds');
-        // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-        core.debug(`Waiting ${ms} milliseconds ...`);
-        // Log the current timestamp, wait, then log the new timestamp
-        core.debug(new Date().toTimeString());
-        await (0, wait_1.wait)(parseInt(ms, 10));
-        core.debug(new Date().toTimeString());
-        // Set outputs for other workflow steps to use
-        core.setOutput('time', new Date().toTimeString());
+        const inputs = (0, input_1.getInputs)();
+        core.info(`Automatically select source parser "${inputs.sourceParser}"`);
     }
     catch (error) {
         // Fail the workflow run if an error occurs
         if (error instanceof Error)
             core.setFailed(error.message);
     }
-}
-
-
-/***/ }),
-
-/***/ 256:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.wait = wait;
-/**
- * Wait for a number of milliseconds.
- * @param milliseconds The number of milliseconds to wait.
- * @returns {Promise<string>} Resolves with 'done!' after the wait is over.
- */
-async function wait(milliseconds) {
-    return new Promise(resolve => {
-        if (isNaN(milliseconds)) {
-            throw new Error('milliseconds not a number');
-        }
-        setTimeout(() => resolve('done!'), milliseconds);
-    });
 }
 
 

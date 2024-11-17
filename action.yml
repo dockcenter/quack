@@ -19,9 +19,9 @@ inputs:
       choose the appropriate parser based on source.
     required: true
     default: auto
-  source-parser-config:
+  source-parser-options:
     description:
-      Additional parser configuration in key value string format (e.g.
+      Additional parser options in key value string format (e.g.
       `key1=value1,key2=value2`)
   destination:
     description: The URL or the id of the destination to check version diff
@@ -32,9 +32,9 @@ inputs:
       will choose the appropriate parser based on destination.
     required: true
     default: auto
-  destination-parser-config:
+  destination-parser-options:
     description:
-      Additional parser configuration in key value string format (e.g.
+      Additional parser options in key value string format (e.g.
       `key1=value1,key2=value2`)
 
 # Define your outputs here.
