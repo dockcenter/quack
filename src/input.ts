@@ -1,21 +1,22 @@
 import * as core from '@actions/core'
+import { Parsers } from './parser'
 
 export interface Inputs {
   source: string
-  sourceParser: string
+  sourceParser: Parsers
   sourceParserOptions: Record<string, string>
   destination: string
-  destinationParser: string
+  destinationParser: Parsers
   destinationParserOptions: Record<string, string>
 }
 
 export function getInputs(): Inputs {
   return {
     source: core.getInput('source', { required: true }),
-    sourceParser: core.getInput('source-parser') || 'auto',
+    sourceParser: (core.getInput('source-parser') as Parsers) || 'auto',
     sourceParserOptions: parseOptions(core.getInput('source-parser-options')),
     destination: core.getInput('destination', { required: true }),
-    destinationParser: core.getInput('source-parser') || 'auto',
+    destinationParser: (core.getInput('source-parser') as Parsers) || 'auto',
     destinationParserOptions: parseOptions(
       core.getInput('destination-parser-options')
     )

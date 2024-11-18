@@ -1,16 +1,20 @@
 import { Parser, Version } from './parser'
 
-interface Options {
+const inputPatterns = ['https://github.com/:owner/:repo/releases']
+
+interface GitHubReleasesParserOptions {
   token?: string
 }
 
-export default class GithubReleases extends Parser<Options> {
-  constructor(options: Options) {
-    super(options)
-    this.inputPatterns = ["https://github.com/:owner/:repo/releases"]
+export default class GitHubReleasesParser extends Parser<GitHubReleasesParserOptions> {
+  constructor() {
+    super(inputPatterns)
   }
 
-  async parse(input: string): Promise<Version[]> {
+  async parse(
+    input: string,
+    options: GitHubReleasesParserOptions
+  ): Promise<Version[]> {
     return Promise.resolve([])
   }
 }

@@ -1,16 +1,22 @@
 import { Parser, Version } from './parser'
 
-interface Options {
+const inputPatterns = [
+  'https://console.hetzner.cloud/projects/:project/servers/snapshots'
+]
+
+interface HetznerSnapshotParserOptions {
   token: string
 }
 
-export default class HetznerSnapshot extends Parser<Options> {
-  constructor(options: Options) {
-    super(options)
-    this.inputPatterns = ["https://console.hetzner.cloud/projects/:project/servers/snapshots"]
+export default class HetznerSnapshotParser extends Parser<HetznerSnapshotParserOptions> {
+  constructor() {
+    super(inputPatterns)
   }
 
-  async parse(input: string): Promise<Version[]> {
+  async parse(
+    input: string,
+    options: HetznerSnapshotParserOptions
+  ): Promise<Version[]> {
     return Promise.resolve([])
   }
 }

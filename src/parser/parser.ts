@@ -9,22 +9,16 @@ export interface Version {
   publishedAt: Date
 }
 
-export abstract class Parser<Options> {
-  protected inputPatterns?: string[]
-
-  /**
-   * Create a new parser instance
-   * @param options The options correlated with the Parser type
-   * @protected
-   */
-  protected constructor(protected options: Options) {}
+export abstract class Parser<O = never> {
+  protected constructor(protected readonly inputPatterns?: string[]) {}
 
   /**
    * Parse version information from the given input
    * @param input The URL for the parser to get version information
+   * @param options Additional parser-specific options
    * @return A promise that resolves to the versions of the given input
    */
-  abstract parse(input: string): Promise<Version[]>
+  abstract parse(input: string, options: O): Promise<Version[]>
 
   /**
    * Check whether the parser supports input

@@ -1,10 +1,19 @@
-import GithubReleases from './github-releases'
-import HetznerSnapshot from './hetzner-snapshot'
+import GitHubReleasesParser from './github-releases'
+import HetznerSnapshotParser from './hetzner-snapshot'
 import { Parser } from './parser'
+import AutoParser from './auto'
 
 export { Parser, Version } from './parser'
 
-export const Parsers: Record<string, typeof Parser<unknown>> = {
-  'github-releases': GithubReleases,
-  'hetzner-snapshot': HetznerSnapshot
+export type Parsers = 'auto' | 'github-releases' | 'hetzner-snapshot'
+
+export function createParser(parser: Parsers): Parser {
+  switch (parser) {
+    case 'github-releases':
+      return new GitHubReleasesParser()
+    case 'hetzner-snapshot':
+      return new HetznerSnapshotParser()
+    default:
+      return new AutoParser()
+  }
 }
