@@ -16,7 +16,7 @@ export function getInputs(): Inputs {
     sourceParser: (core.getInput('source-parser') as Parsers) || 'auto',
     sourceParserOptions: parseOptions(core.getInput('source-parser-options')),
     destination: core.getInput('destination', { required: true }),
-    destinationParser: (core.getInput('source-parser') as Parsers) || 'auto',
+    destinationParser: (core.getInput('destination-parser') as Parsers) || 'auto',
     destinationParserOptions: parseOptions(
       core.getInput('destination-parser-options')
     )
