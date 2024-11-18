@@ -2,30 +2,20 @@ import * as core from '@actions/core'
 
 export interface Inputs {
   source: string
-  sourceParser: Parsers
+  sourceParser: string
   sourceParserOptions: Record<string, string>
   destination: string
-  destinationParser: Parsers
+  destinationParser: string
   destinationParserOptions: Record<string, string>
-}
-
-export enum Parsers {
-  auto = 'auto'
 }
 
 export function getInputs(): Inputs {
   return {
     source: core.getInput('source', { required: true }),
-    sourceParser:
-      Parsers[
-        (core.getInput('source-parser') as keyof typeof Parsers) || 'auto'
-      ],
+    sourceParser: core.getInput('source-parser') || 'auto',
     sourceParserOptions: parseOptions(core.getInput('source-parser-options')),
     destination: core.getInput('destination', { required: true }),
-    destinationParser:
-      Parsers[
-        (core.getInput('source-parser') as keyof typeof Parsers) || 'auto'
-      ],
+    destinationParser: core.getInput('source-parser') || 'auto',
     destinationParserOptions: parseOptions(
       core.getInput('destination-parser-options')
     )
