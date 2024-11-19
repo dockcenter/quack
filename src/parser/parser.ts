@@ -29,8 +29,8 @@ export abstract class Parser<O = never> {
     if (!this.inputPatterns) return false
 
     for (const pattern of this.inputPatterns) {
-      const result = match(pattern)(input)
-      if (result) return true
+      const matchFn = match(pattern)
+      if (matchFn(input)) return true
     }
     return false
   }

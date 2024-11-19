@@ -13,6 +13,15 @@ export async function run(): Promise<void> {
     const sourceParser = createParser(inputs.sourceParser)
     const destinationParser = createParser(inputs.destinationParser)
 
+    if (!sourceParser.supports(inputs.source)) {
+      core.error(`Parser "${inputs.sourceParser}" does not support source "${inputs.source}"`)
+      return
+    }
+    if (!destinationParser.supports(inputs.destination)) {
+      core.error(`Parser "${inputs.destinationParser}" does not support destination "${inputs.destination}"`)
+      return
+    }
+
     const [sourceVersions, destinationVersions] = await Promise.all([
       sourceParser.parse(inputs.source, inputs.sourceParserOptions as never),
       destinationParser.parse(

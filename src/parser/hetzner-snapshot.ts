@@ -1,7 +1,7 @@
 import { Parser, Version } from './parser'
 
 const inputPatterns = [
-  'https://console.hetzner.cloud/projects/:project/servers/snapshots'
+  'https\\://console.hetzner.cloud/projects/:project/servers/snapshots'
 ]
 
 interface HetznerSnapshotParserOptions {

@@ -9,4 +9,8 @@ export default class AutoParser extends Parser {
   async parse(input: string): Promise<Version[]> {
     return Promise.resolve([])
   }
+
+  supports(input: string): boolean {
+    return true
+  }
 }

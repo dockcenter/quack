@@ -1,6 +1,6 @@
 import { Parser, Version } from './parser'
 
-const inputPatterns = ['https://github.com/:owner/:repo/releases']
+const inputPatterns = ['https\\://github.com/:owner/:repo/releases']
 
 interface GitHubReleasesParserOptions {
   token?: string
