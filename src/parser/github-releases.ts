@@ -3,18 +3,13 @@ import { getOctokit } from '@actions/github'
 import { match } from 'path-to-regexp'
 import { UnsupportedInputError } from './errors'
 
-const inputPatterns = ['https\\://github.com/:owner/:repo/releases']
-const matchFn = match(inputPatterns[0])
+const matchFn = match('https\\://github.com/:owner/:repo/releases')
 
 interface GitHubReleasesParserOptions {
   token: string
 }
 
-export default class GitHubReleasesParser extends Parser<GitHubReleasesParserOptions> {
-  constructor() {
-    super(inputPatterns)
-  }
-
+export default class GitHubReleasesParser implements Parser<GitHubReleasesParserOptions> {
   async parse(
     input: string,
     options: GitHubReleasesParserOptions
