@@ -4,6 +4,7 @@ import { Parser } from './parser'
 import AutoParser from './auto'
 
 export { Parser, Version } from './parser'
+export { UnsupportedInputError } from './errors'
 
 export type Parsers = 'auto' | 'github-releases' | 'hetzner-snapshot'
 

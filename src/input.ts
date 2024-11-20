@@ -24,11 +24,11 @@ export function getInputs(): Inputs {
 }
 
 function parseOptions(input: string): Record<string, string> {
-  return input
-    ? {}
-    : input
-        .split(',')
-        .map(entry => entry.split('='))
-        .filter(e => e.length === 2)
-        .reduce((options, [key, value]) => ({ ...options, [key]: value }), {})
+  return input ?
+    input
+      .split(',')
+      .map(entry => entry.split('='))
+      .filter(e => e.length === 2)
+      .reduce((options, [key, value]) => ({ ...options, [key]: value }), {})
+    : {}
 }
